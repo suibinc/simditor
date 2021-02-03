@@ -1,7 +1,7 @@
 {
-  "name": "simditor",
+  "name": "@sbc/editor",
   "version": "2.3.28",
-  "description": "A simple online editor",
+  "description": "A simple online editor based simditor v2.3.28",
   "repository": {
     "type": "git",
     "url": "git@github.com:mycolorway/simditor.git"
@@ -12,6 +12,8 @@
     "url": "https://github.com/mycolorway/simditor/issues"
   },
   "scripts": {
+    "start": "grunt",
+    "package": "grunt package",
     "test": "grunt test --verbose"
   },
   "main": "lib/simditor.js",
@@ -32,6 +34,7 @@
     "express": "~3.3.4",
     "grunt": "0.x",
     "grunt-banner": "0.3.x",
+    "grunt-cli": "^1.3.2",
     "grunt-contrib-clean": "0.x",
     "grunt-contrib-coffee": "0.x",
     "grunt-contrib-compress": "0.x",
@@ -44,6 +47,7 @@
     "grunt-express": "1.4.0",
     "grunt-jekyll": "0.x",
     "grunt-parallel": "^0.5.1",
-    "grunt-umd": "2.3.x"
+    "grunt-umd": "2.3.x",
+    "sass": "^1.32.6"
   }
 }

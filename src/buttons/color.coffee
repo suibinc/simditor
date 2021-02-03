@@ -15,6 +15,7 @@ class ColorButton extends Button
   renderMenu: ->
     $('''
     <ul class="color-list">
+      <li><a href="javascript:;" class="font-color font-color-default"></a></li>
       <li><a href="javascript:;" class="font-color font-color-1"></a></li>
       <li><a href="javascript:;" class="font-color font-color-2"></a></li>
       <li><a href="javascript:;" class="font-color font-color-3"></a></li>
@@ -22,7 +23,14 @@ class ColorButton extends Button
       <li><a href="javascript:;" class="font-color font-color-5"></a></li>
       <li><a href="javascript:;" class="font-color font-color-6"></a></li>
       <li><a href="javascript:;" class="font-color font-color-7"></a></li>
-      <li><a href="javascript:;" class="font-color font-color-default"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-8"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-9"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-10"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-11"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-12"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-13"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-14"></a></li>
+      <li><a href="javascript:;" class="font-color font-color-15"></a></li>
     </ul>
     ''').appendTo(@menuWrapper)
 
@@ -50,7 +58,7 @@ class ColorButton extends Button
         textNode = document.createTextNode(@_t('coloredText'))
         range.insertNode textNode
         range.selectNodeContents textNode
-      
+
       # 为了搜狗解决浏览器的兼容性问题
       @editor.selection.range range
 

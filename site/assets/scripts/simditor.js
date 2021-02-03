@@ -18,7 +18,8 @@ var AlignmentButton, BlockquoteButton, BoldButton, Button, Clipboard, CodeButton
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
-  slice = [].slice;
+  slice = [].slice,
+  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 Selection = (function(superClass) {
   extend(Selection, superClass);
@@ -3604,7 +3605,7 @@ ColorButton = (function(superClass) {
   };
 
   ColorButton.prototype.renderMenu = function() {
-    $('<ul class="color-list">\n  <li><a href="javascript:;" class="font-color font-color-1"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-2"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-3"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-4"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-5"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-6"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-7"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-default"></a></li>\n</ul>').appendTo(this.menuWrapper);
+    $('<ul class="color-list">\n  <li><a href="javascript:;" class="font-color font-color-default"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-1"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-2"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-3"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-4"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-5"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-6"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-7"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-8"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-9"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-10"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-11"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-12"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-13"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-14"></a></li>\n  <li><a href="javascript:;" class="font-color font-color-15"></a></li>\n</ul>').appendTo(this.menuWrapper);
     this.menuWrapper.on('mousedown', '.color-list', function(e) {
       return false;
     });
@@ -4009,12 +4010,13 @@ CodePopover = (function(superClass) {
   extend(CodePopover, superClass);
 
   function CodePopover() {
+    this._setCode = bind(this._setCode, this);
     return CodePopover.__super__.constructor.apply(this, arguments);
   }
 
   CodePopover.prototype.render = function() {
     var $option, k, lang, len, ref;
-    this._tpl = "<div class=\"code-settings\">\n  <div class=\"settings-field\">\n    <select class=\"select-lang\">\n      <option value=\"-1\">" + (this._t('selectLanguage')) + "</option>\n    </select>\n  </div>\n</div>";
+    this._tpl = "<div class=\"code-settings\">\n  <div class=\"settings-field\">\n    <select class=\"select-lang\">\n      <option value=\"-1\">" + (this._t('selectLanguage')) + "</option>\n    </select>\n  </div>\n  <div class='settings-field extra-editor'>\n    <span class='extra-btn'>外部编辑器</span>\n  </div>\n</div>";
     this.langs = this.editor.opts.codeLanguages || [
       {
         name: 'Bash',
@@ -4080,6 +4082,7 @@ CodePopover = (function(superClass) {
     ];
     this.el.addClass('code-popover').append(this._tpl);
     this.selectEl = this.el.find('.select-lang');
+    this.editorEl = this.el.find('.extra-editor');
     ref = this.langs;
     for (k = 0, len = ref.length; k < len; k++) {
       lang = ref[k];
@@ -4103,10 +4106,17 @@ CodePopover = (function(superClass) {
         return _this.editor.trigger('valuechanged');
       };
     })(this));
-    return this.editor.on('valuechanged', (function(_this) {
+    this.editor.on('valuechanged', (function(_this) {
       return function(e) {
         if (_this.active) {
           return _this.refresh();
+        }
+      };
+    })(this));
+    return this.editorEl.on('click', (function(_this) {
+      return function(e) {
+        if (_this.editor.opts.coding) {
+          return _this.editor.opts.coding(_this.target.text(), _this._setCode);
         }
       };
     })(this));
@@ -4122,6 +4132,11 @@ CodePopover = (function(superClass) {
     } else {
       return this.selectEl.val(-1);
     }
+  };
+
+  CodePopover.prototype._setCode = function(value) {
+    this.target.text(value);
+    return this.editor.inputManager.throttledValueChanged();
   };
 
   return CodePopover;

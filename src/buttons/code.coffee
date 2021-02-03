@@ -127,6 +127,9 @@ class CodePopover extends Popover
             <option value="-1">#{@_t 'selectLanguage'}</option>
           </select>
         </div>
+        <div class='settings-field extra-editor'>
+          <span class='extra-btn'>外部编辑器</span>
+        </div>
       </div>
     """
 
@@ -156,6 +159,7 @@ class CodePopover extends Popover
     @el.addClass('code-popover')
       .append(@_tpl)
     @selectEl = @el.find '.select-lang'
+    @editorEl = @el.find '.extra-editor'
 
     for lang in @langs
       $option = $ '<option/>',
@@ -178,10 +182,18 @@ class CodePopover extends Popover
     @editor.on 'valuechanged', (e) =>
       @refresh() if @active
 
+    @editorEl.on 'click', (e) =>
+      if (@editor.opts.coding)
+        @editor.opts.coding @target.text(), @_setCode
+
   show: (args...) ->
     super args...
     @lang = @target.attr('data-lang')
     if @lang? then @selectEl.val(@lang) else @selectEl.val(-1)
+
+  _setCode: (value) =>
+    @target.text value
+    @editor.inputManager.throttledValueChanged()
 
 
 Simditor.Toolbar.addButton CodeButton
