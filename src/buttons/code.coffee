@@ -184,7 +184,7 @@ class CodePopover extends Popover
 
     @editorEl.on 'click', (e) =>
       if (@editor.opts.coding)
-        @editor.opts.coding @target.text(), @_setCode
+        @editor.opts.coding { lang: @selectEl.val(), value: @target.text() }, @_setCode
 
   show: (args...) ->
     super args...

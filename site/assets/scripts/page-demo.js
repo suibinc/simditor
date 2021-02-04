@@ -15,7 +15,12 @@
       defaultImage: 'assets/images/image.png',
       upload: location.search === '?upload' ? {
         url: '/upload'
-      } : false
+      } : false,
+      coding: (function(_this) {
+        return function(v) {
+          return console.log(v);
+        };
+      })(this)
     });
     $preview = $('#preview');
     if ($preview.length > 0) {

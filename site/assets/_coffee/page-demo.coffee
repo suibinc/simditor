@@ -12,6 +12,7 @@ $ ->
     pasteImage: true
     defaultImage: 'assets/images/image.png'
     upload: if location.search == '?upload' then {url: '/upload'} else false
+    coding: (v) => console.log(v)
 
   $preview = $('#preview')
   if $preview.length > 0
