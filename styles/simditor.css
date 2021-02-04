@@ -376,10 +376,12 @@
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item {
   display: block;
   font-size: 16px;
-  padding: 12px 16px;
+  padding: 8px 16px;
   text-decoration: none;
   color: #666;
-  vertical-align: baseline;
+}
+.simditor .simditor-toolbar .toolbar-menu ul > li .menu-item > span {
+  display: block;
 }
 .simditor .simditor-toolbar .toolbar-menu ul > li .menu-item:hover {
   background: #f6f6f6;
@@ -654,7 +656,7 @@
   outline: 0;
 }
 .simditor .simditor-body h1, .simditor .simditor-body h2, .simditor .simditor-body h3, .simditor .simditor-body h4, .simditor .simditor-body h5, .simditor .simditor-body h6, .editor-style h1, .editor-style h2, .editor-style h3, .editor-style h4, .editor-style h5, .editor-style h6 {
-  font-weight: normal;
+  font-weight: bold;
   margin-top: 24px;
   margin-bottom: 6px;
   color: #222;
