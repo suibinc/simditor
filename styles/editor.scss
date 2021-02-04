@@ -287,10 +287,10 @@ $settings-field-height: 28px;
           .menu-item {
             display: block;
             font-size: 16px;
-            line-height: 2em;
-            padding: 0 10px;
+            padding: 12px 16px;
             text-decoration: none;
-            color: #666666;
+            color: #666;
+            vertical-align: baseline;
 
             &:hover {
               background: #f6f6f6;
@@ -298,33 +298,33 @@ $settings-field-height: 28px;
 
             &.menu-item-h1 {
               font-size: 24px;
-              color: #333333;
+              font-weight: bold;
             }
 
             &.menu-item-h2 {
               font-size: 22px;
-              color: #333333;
+              font-weight: bold;
             }
 
             &.menu-item-h3 {
               font-size: 20px;
-              color: #333333;
+              font-weight: bold;
             }
 
             &.menu-item-h4 {
               font-size: 18px;
-              color: #333333;
+              font-weight: bold;
             }
 
             &.menu-item-h5 {
               font-size: 16px;
-              color: #333333;
+              font-weight: bold;
             }
           }
 
           .separator {
             display: block;
-            border-top: 1px solid #cccccc;
+            border-top: 1px dashed #eee;
             height: 0;
             line-height: 0;
             font-size: 0;
@@ -364,7 +364,7 @@ $settings-field-height: 28px;
               }
             }
 
-            $font-colors: #E33737 #e28b41 #c8a732 #209361 #418caf #aa8773 #999999 #FF3333 #FF6600 #339933 #40A9FF #00CCFF #722ed1 #777777;
+            $font-colors: #FF3333 #FF6600 #339933 #40A9FF #00CCFF #722ed1 #777777 #E33737 #e28b41 #c8a732 #209361 #418caf #aa8773 #999999;
             $i: 1;
             @each $color in $font-colors {
               .font-color-#{$i} {
@@ -450,10 +450,10 @@ $settings-field-height: 28px;
 
   .simditor-popover {
     display: none;
-    padding: 8px 8px 2px;
+    padding: 10px 10px 4px;
     background: #ffffff;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    border-radius: 2px;
+    border-radius: 4px;
     position: absolute;
     z-index: 2;
 
@@ -465,7 +465,7 @@ $settings-field-height: 28px;
 
       label {
         display: inline-block;
-        margin: 0 5px 0 0;
+        margin: 0 6px 0 0;
       }
 
       input,
@@ -501,7 +501,7 @@ $settings-field-height: 28px;
     &.image-popover .btn-upload,
     &.image-popover .btn-restore {
       display: inline-block;
-      margin: 0 0 0 5px;
+      margin: 0 0 0 6px;
       color: #333333;
       font-size: 14px;
       outline: 0;
@@ -536,11 +536,12 @@ $settings-field-height: 28px;
         display: flex;
 
         .extra-btn {
+          font-size: 16px;
+          font-weight: bold;
           display: inline-block;
           height: $settings-field-height;
           line-height: $settings-field-height;
-          margin-left: 16px;
-          margin-right: 8px;
+          margin: 0 4px 0 12px;
           color: #333;
           cursor: pointer;
 

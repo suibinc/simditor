@@ -128,7 +128,7 @@ class CodePopover extends Popover
           </select>
         </div>
         <div class='settings-field extra-editor'>
-          <span class='extra-btn'>外部编辑器</span>
+          <span class='extra-btn simditor-icon simditor-icon-code'></span>
         </div>
       </div>
     """
